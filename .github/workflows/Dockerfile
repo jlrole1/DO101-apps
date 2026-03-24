@@ -1,8 +1,10 @@
-Run docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-#0 building with "default" instance using docker driver
+FROM node:18
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 2B done
-#1 DONE 0.0s
-ERROR: failed to build: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
-Error: Process completed with exit code 1.
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+CMD ["node", "index.js"]
